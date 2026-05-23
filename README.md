@@ -9,6 +9,7 @@ Included files:
 Use this repo to launch and test a simple Cisco L2 network topology using Containerlab and Cisco IOL images.
 
 
+```mermaid
 
 client                        server
    eth1  eth2  eth3             eth1  eth2  eth3
@@ -19,7 +20,7 @@ client                        server
         │   sw1   │
         │  (L2)   │
         └─────────┘
-
+```
 
 File Structure:iol-lab/
 ├── iol-lab.clab.yml
