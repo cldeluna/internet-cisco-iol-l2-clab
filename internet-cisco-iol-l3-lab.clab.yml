@@ -31,10 +31,10 @@ topology:
 
   links:
     # Client to switch (one port per VLAN)
-    - endpoints: ["client:eth1", "sw1:Ethernet0/1"]
-    - endpoints: ["client:eth2", "sw1:Ethernet0/2"]
-    - endpoints: ["client:eth3", "sw1:Ethernet0/3"]
+    - endpoints: ["client:eth1", "core-sw1:Ethernet0/1"]
+    - endpoints: ["client:eth2", "core-sw1:Ethernet0/2"]
+    - endpoints: ["client:eth3", "core-sw1:Ethernet0/3"]
     # Server to switch (one port per VLAN)
-    - endpoints: ["server:eth1", "sw1:Ethernet1/0"]
-    - endpoints: ["server:eth2", "sw1:Ethernet1/1"]
-    - endpoints: ["server:eth3", "sw1:Ethernet1/2"]
+    - endpoints: ["server:eth1", "core-sw1:Ethernet1/0"]
+    - endpoints: ["server:eth2", "core-sw1:Ethernet1/1"]
+    - endpoints: ["server:eth3", "core-sw1:Ethernet1/2"]
