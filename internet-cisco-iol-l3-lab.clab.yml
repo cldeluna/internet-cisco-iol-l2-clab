@@ -9,3 +9,32 @@ topology:
       startup-config: sw1.partial.cfg
       ports:
         - "20512:22"
+
+    server:
+      kind: linux
+      image: alpine:3.19
+      binds:
+        - server/dnsmasq.conf:/etc/dnsmasq.conf
+        - server/start.sh:/start.sh
+      exec:
+        - sh /start.sh
+
+    client:
+      kind: linux
+      image: alpine:3.19
+      binds:
+        - client/start.sh:/start.sh
+      ports:
+        - "20513:22"
+      exec:
+        - sh /start.sh
+
+  links:
+    # Client to switch (one port per VLAN)
+    - endpoints: ["client:eth1", "sw1:Ethernet0/1"]
+    - endpoints: ["client:eth2", "sw1:Ethernet0/2"]
+    - endpoints: ["client:eth3", "sw1:Ethernet0/3"]
+    # Server to switch (one port per VLAN)
+    - endpoints: ["server:eth1", "sw1:Ethernet1/0"]
+    - endpoints: ["server:eth2", "sw1:Ethernet1/1"]
+    - endpoints: ["server:eth3", "sw1:Ethernet1/2"]
