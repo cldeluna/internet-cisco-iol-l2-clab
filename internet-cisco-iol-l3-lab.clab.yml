@@ -1,0 +1,11 @@
+name: internet-cisco-iol-l2-lab
+
+topology:
+  nodes:
+    core-sw1:
+      kind: cisco_iol
+      image: vrnetlab/cisco_iol:L2-17.15.01
+      type: L2
+      startup-config: sw1.partial.cfg
+      ports:
+        - "20512:22"
