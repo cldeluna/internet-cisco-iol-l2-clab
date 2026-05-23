@@ -36,14 +36,16 @@ File Structure:iol-lab/
 ## Shell into the client
 docker exec -it clab-iol-lab-client sh
 
-#$ Verify DHCP leases
+## Verify DHCP leases
 ip addr show eth1
 ip addr show eth2
 ip addr show eth3
 
 ## Test HTTP through the ACL
 curl http://192.0.2.10
+
 curl http://198.51.100.10
+
 curl http://203.0.113.10
 
 ## Test SSH through the ACL
@@ -51,3 +53,12 @@ ssh root@192.0.2.10       # password: testpass
 
 ## Test DNS through the ACL
 nslookup google.com 192.0.2.10
+
+
+## Handy Commands
+
+`clab destroy --cleanup`
+
+`sudo docker logs -f clab-internet-cisco-iol-l2-lab-core-sw1`
+
+`ssh-keygen -f "/home/claudia/.ssh/known_hosts" -R "172.20.20.2"`
