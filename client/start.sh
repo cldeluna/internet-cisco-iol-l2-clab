@@ -2,13 +2,16 @@
 
 apk add --no-cache curl openssh-client openssh-server
 
-# Start SSH server first so remote access is available immediately
+# SSH first
 ssh-keygen -A
 echo "root:testpass" | chpasswd
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 /usr/sbin/sshd
 
-# DHCP can fail if the switch isn't ready yet — don't let it kill the script
+# DHCP on each VLAN interface
 for iface in eth1 eth2 eth3; do
   udhcpc -i "$iface" -b -q || true
 done
+
+# Route to server subnet through the switch (not management)
+ip route add 192.168.1.0/24 via 192.0.2.1 dev eth1 || true

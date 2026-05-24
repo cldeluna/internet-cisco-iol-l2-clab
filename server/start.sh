@@ -2,16 +2,19 @@
 
 apk add --no-cache dnsmasq nginx openssh-server curl
 
-# Start SSH first so the container is reachable regardless
+# SSH first
 ssh-keygen -A
 echo "root:testpass" | chpasswd
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 /usr/sbin/sshd
 
-# Static IPs on each VLAN interface
-ip addr add 192.0.2.10/24 dev eth1
-ip addr add 198.51.100.10/24 dev eth2
-ip addr add 203.0.113.10/24 dev eth3
+# Single interface on server VLAN
+ip addr add 192.168.1.10/24 dev eth1
+
+# Routes to client subnets go through the switch (not management)
+ip route add 192.0.2.0/24 via 192.168.1.1 dev eth1
+ip route add 198.51.100.0/24 via 192.168.1.1 dev eth1
+ip route add 203.0.113.0/24 via 192.168.1.1 dev eth1
 
 # Web content
 echo 'ACL test OK!' > /var/lib/nginx/html/index.html

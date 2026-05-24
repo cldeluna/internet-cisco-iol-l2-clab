@@ -9,6 +9,7 @@ topology:
       startup-config: sw1.partial.cfg
       ports:
         - "20512:22"
+        - "2223:23"
 
     server:
       kind: linux
@@ -30,11 +31,9 @@ topology:
         - sh /start.sh
 
   links:
-    # Client to switch (one port per VLAN)
-    - endpoints: ["client:eth1", "core-sw1:Ethernet0/1"]
-    - endpoints: ["client:eth2", "core-sw1:Ethernet0/2"]
-    - endpoints: ["client:eth3", "core-sw1:Ethernet0/3"]
-    # Server to switch (one port per VLAN)
-    - endpoints: ["server:eth1", "core-sw1:Ethernet1/0"]
-    - endpoints: ["server:eth2", "core-sw1:Ethernet1/1"]
-    - endpoints: ["server:eth3", "core-sw1:Ethernet1/2"]
+    # Client — one port per VLAN
+    - endpoints: ["client:eth1", "sw1:Ethernet0/1"]
+    - endpoints: ["client:eth2", "sw1:Ethernet0/2"]
+    - endpoints: ["client:eth3", "sw1:Ethernet0/3"]
+    # Server — single link on VLAN 100
+    - endpoints: ["server:eth1", "sw1:Ethernet1/0"]
