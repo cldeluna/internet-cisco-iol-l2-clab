@@ -36,4 +36,4 @@ topology:
     - endpoints: ["client:eth2", "core-sw1:Ethernet0/2"]
     - endpoints: ["client:eth3", "core-sw1:Ethernet0/3"]
     # Server — single link on VLAN 100
-    - endpoints: ["server:eth1", "sw1:Ethernet1/0"]
+    - endpoints: ["server:eth1", "core-sw1:Ethernet1/0"]
