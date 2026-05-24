@@ -13,5 +13,6 @@ for iface in eth1 eth2 eth3; do
   udhcpc -i "$iface" -b -q || true
 done
 
-# Route to server subnet through the switch (not management)
+# Wait for IPs to settle, then route to server through the switch
+sleep 2
 ip route add 192.168.1.0/24 via 192.0.2.1 dev eth1 || true
