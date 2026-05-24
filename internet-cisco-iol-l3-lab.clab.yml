@@ -32,8 +32,8 @@ topology:
 
   links:
     # Client — one port per VLAN
-    - endpoints: ["client:eth1", "sw1:Ethernet0/1"]
-    - endpoints: ["client:eth2", "sw1:Ethernet0/2"]
-    - endpoints: ["client:eth3", "sw1:Ethernet0/3"]
+    - endpoints: ["client:eth1", "core-sw1:Ethernet0/1"]
+    - endpoints: ["client:eth2", "core-sw1:Ethernet0/2"]
+    - endpoints: ["client:eth3", "core-sw1:Ethernet0/3"]
     # Server — single link on VLAN 100
     - endpoints: ["server:eth1", "sw1:Ethernet1/0"]
